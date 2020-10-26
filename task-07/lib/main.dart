@@ -7,7 +7,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,28 +17,23 @@ class MyApp extends StatelessWidget {
           textTheme: TextTheme(
               button: TextStyle(fontSize: 18.0, color: Colors.white))),
       home: Scaffold(
-        
-        body: DefaultTabController(
-          length: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  child: CustomPageView(),
-                ),
-                flex: 25,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(
+                child: CustomPageView(),
               ),
-              Expanded(
-                child: Container(
-                  child: AccountButtonWidget(),
-                ),
-                flex: 3,
-              )
-            ],
-          ),
+              flex: 25,
+            ),
+            Expanded(
+              child: Container(
+                child: AccountButtonWidget(),
+              ),
+              flex: 3,
+            )
+          ],
         ),
-        
       ),
     );
   }
