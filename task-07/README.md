@@ -1,16 +1,16 @@
-# sample_ui
+# Ubiquitous UI
 
-A new Flutter project.
+Installed flutter, Android Studio, Visual Studio code.
+- Used Android Studio to setup an AVD.
+- Used VS to code up the flutter app.
 
-## Getting Started
+# App Structure
 
-This project is a starting point for a Flutter application.
+ - Root file : main.dart contains a Column of two widgets CustomPageView and AccountButonWidget with 25: 3 ratio.
+ - CustomPageView :custom_page_view.dart contains a stack of two widgets Dots Indicator which is postioned on top and and a PageView Widget.
+                 Page View Widget contains 2 View Widget (intro_view_0.dart and intro_view_1.dart)
+ - AccountButtonWidget : account_button_widget.dart contains a RaisedButton.
 
-A few resources to get you started if this is your first Flutter project:
+## Preview
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](app.gif)
