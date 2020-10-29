@@ -18,9 +18,9 @@ for repo in response.json():
     for data in output.split("\n")[:-1]:
 
         json_data = json.loads(data)
-        commits.append(json_data['data']['commit'])
+        commits.append(json_data)
 
-        print(json_data['data']['commit'], json_data['data']['message'])
+        print(json_data['data']['message'])
 
 
 with open("commits.json", "w") as myFile:
