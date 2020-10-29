@@ -24,4 +24,4 @@ for repo in response.json():
 
 
 with open("commits.json", "w") as myFile:
-    myFile.write(commits[:-1])
+    myFile.write(commits)
