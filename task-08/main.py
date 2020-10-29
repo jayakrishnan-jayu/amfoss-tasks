@@ -18,7 +18,7 @@ for repo in response.json():
     for data in output.split("\n")[:-1]:
 
         json_data = json.loads(data)
-        commits += str(json_data) + ','
+        commits += str(json_data) + '\n'
 
         print(json_data['data']['message'])
 
