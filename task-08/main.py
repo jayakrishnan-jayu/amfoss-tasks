@@ -6,7 +6,7 @@ user = 'snitch3s'
 
 response = requests.get('https://api.github.com/users/'+user+'/repos')
 
-commits = []
+commits = ""
 
 for repo in response.json():
     print("searching inside "+ repo["name"])
@@ -18,10 +18,10 @@ for repo in response.json():
     for data in output.split("\n")[:-1]:
 
         json_data = json.loads(data)
-        commits.append(json_data)
+        commits += str(json_data) + ','
 
         print(json_data['data']['message'])
 
 
 with open("commits.json", "w") as myFile:
-    myFile.write(json.dumps(commits))
+    myFile.write(commits[:-1])
