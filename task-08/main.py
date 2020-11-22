@@ -3,25 +3,41 @@ import requests
 import json
 
 user = 'snitch3s'
+#user = 'opendistro-for-elasticsearch'
+url = 'https://api.github.com/users/'+user+'/repos'
+hasNext = True
+counter = 0
+while (hasNext):
 
-response = requests.get('https://api.github.com/users/'+user+'/repos')
+    response = requests.get(url)
 
-commits = ""
+    try:
+        head = response.headers['link']
+        if ('rel="prev"' in head.split(";")[1]):
+            hasNext = False
+        else:
+            url = head.split(";")[0][1:-1]
+    except KeyError:
+        print("No other pages found")
+        hasNext = False
+    finally:
+        commits = ""
+        
+        for repo in response.json():
+            counter+=1
+            print(counter , "searching inside "+ repo["name"])
+            
+            result = subprocess.run(['perceval', 'git', '--json-line','https://github.com/'+user+'/'+ repo['name']], stdout=subprocess.PIPE)
 
-for repo in response.json():
-    print("searching inside "+ repo["name"])
+            output = result.stdout.decode('utf-8')
 
-    result = subprocess.run(['perceval', 'git', '--json-line','https://github.com/'+user+'/'+ repo['name']], stdout=subprocess.PIPE)
+            for data in output.split("\n")[:-1]:
 
-    output = result.stdout.decode('utf-8')
+                json_data = json.loads(data)
+                commits += str(json_data) + '\n'
 
-    for data in output.split("\n")[:-1]:
-
-        json_data = json.loads(data)
-        commits += str(json_data) + '\n'
-
-        print(json_data['data']['message'])
+                print(json_data['data']['message'])
 
 
-with open("commits.json", "w") as myFile:
-    myFile.write(commits)
+        with open("commits.json", "w") as myFile:
+            myFile.write(commits)
